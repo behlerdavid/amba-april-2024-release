@@ -20,6 +20,9 @@
     "LandingZoneManagementGroup": {
       "value": "mg-managed-landingzones"
     },
+    "ThirdPartyLandingZoneManagementGroup": {
+      "value": "mg-st.pauli-managed-landingzone"
+    },
     "enableAMBAConnectivity": {
       "value": "Yes"
     },
