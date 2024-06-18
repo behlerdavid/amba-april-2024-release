@@ -49,12 +49,6 @@
                 "description": "Provide the name of the Management Group that will be used to host the landing zone resources."
             }
         },
-        "ThirdPartyLandingZoneManagementGroup": {
-            "type": "string",
-            "metadata": {
-                "description": "Provide the name of the Management Group that will be used to host the landing zone resources."
-            }
-        },
         "enableAMBAConnectivity": {
             "type": "string",
             "defaultValue": "Yes",
@@ -329,34 +323,6 @@
             "apiVersion": "2020-10-01",
             "name": "[variables('deploymentNames').AMBALandingZoneDeploymentName]",
             "scope": "[concat('Microsoft.Management/managementGroups/', parameters('LandingZoneManagementGroup'))]",
-            "location": "[deployment().location]",
-            "dependsOn": [
-                "ambaPolicyCompletion"
-            ],
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "contentVersion": "1.0.0.0",
-                    "uri": "[variables('deploymentUris').AMBALandingZoneInitiative]"
-                },
-                "parameters": {
-                    "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
-                    },
-                    "policyAssignmentParameters": {
-                        "value": "[variables('policyAssignmentParametersLandingZone')]"
-                    }
-                }
-            }
-        },
-        {
-            // GUD Zusatz:
-            // Assigning AMBA LandingZone PolicySet to Third Party Managed LandingZone MG if condition is true
-            "condition": "[equals(parameters('enableAMBALandingZone'), 'Yes')]",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2020-10-01",
-            "name": "[variables('deploymentNames').AMBALandingZoneDeploymentName]",
-            "scope": "[concat('Microsoft.Management/managementGroups/', parameters('ThirdPartyLandingZoneManagementGroup'))]",
             "location": "[deployment().location]",
             "dependsOn": [
                 "ambaPolicyCompletion"
